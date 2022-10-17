@@ -1,7 +1,7 @@
 from openpyxl import load_workbook
 from scipy.interpolate import interp1d
 import numpy as np
-from plotly import make_subplots
+from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
 
@@ -26,23 +26,25 @@ def get_annuity_payment(start_age, end_age, r):
 
 # For now only allow annuity investments that are a multiple of 5 (are on the grid)
 def simulate(c, w0, grid_w, an_investment, an, r):
+    an_i = an_investment // 5  # Position in grid
     n_periods = c.shape[0]
+
+    # Init solution vectors
     sim_c = np.nan * np.zeros(n_periods)
-    sim_m = np.nan * np.zeros(n_periods)
-    sim_m[0] = w0 - an_investment
-    sim_c[0] = interp1d(grid_w, c[0][int(an_investment/5)])(sim_m[0])
+    sim_w = np.nan * np.zeros(n_periods)
+
+    sim_w[0] = w0 - an_investment
+    sim_c[0] = interp1d(grid_w, c[0][an_i])(sim_w[0])
     for t in range(1, n_periods):
-        sim_m[t] = (sim_m[t-1] - sim_c[t-1] + an) * r
-        if sim_m[t] < 0.001:
-            print(t)
-        sim_c[t] = interp1d(grid_w, c[t][int(an_investment / 5)], fill_value="extrapolate")(sim_m[t])
-    return sim_c, sim_m
+        sim_w[t] = (sim_w[t-1] - sim_c[t-1] + an) * r
+        sim_c[t] = interp1d(grid_w, c[t][an_i], fill_value="extrapolate")(sim_w[t])
+    return sim_c, sim_w
 
 
-def plot_simulation(sim_c, sim_m, s, T, w_0, an_inv):
+def plot_simulation(sim_c, sim_w, s, T, w_0, an_inv):
     fig = make_subplots()
     fig.add_trace(go.Scatter(x=np.arange(s, T), y=sim_c, name="consumption"))
-    fig.add_trace(go.Scatter(x=np.arange(s, T), y=sim_m, name="wealth"))
+    fig.add_trace(go.Scatter(x=np.arange(s, T), y=sim_w, name="wealth"))
     annotations = [dict(xref='paper', yref='paper', x=0.0, y=1.05,
                             xanchor='left', yanchor='bottom',
                             text='w_0 = {}, annuity investment = {}'.format(w_0, an_inv),

@@ -2,6 +2,9 @@ from utility import get_survival_prob, get_annuity_payment, simulate, plot_simul
 import numpy as np
 from scipy.interpolate import interp1d
 from scipy.optimize import minimize_scalar
+import time
+
+start = time.time()
 
 # Model Parameters
 beta = 0.96  # time preference
@@ -61,3 +64,6 @@ w_0 = 100
 an_investment = 50
 sim_c, sim_w = simulate(c, w_0, grid_w, an_investment, an_payout[10], r)
 plot_simulation(sim_c, sim_w, s, T, w_0, an_investment)
+
+# Print elapsed time
+print(time.time() - start)
