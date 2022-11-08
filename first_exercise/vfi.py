@@ -1,4 +1,4 @@
-from utility import get_survival_prob, get_annuity_payment, simulate, plot_simulation
+from first_exercise.utility import get_survival_prob, get_annuity_payment, simulate, plot_simulation
 import numpy as np
 from scipy.interpolate import interp1d
 from scipy.optimize import minimize_scalar
@@ -11,11 +11,9 @@ beta = 0.96  # time preference
 w_0 = 100  # initial wealth
 gamma = 5  # risk aversion coefficient
 s = 65  # starting age
-T = 119  # final period
+T = 70  # final period
 r = 1.02  # interest rate
 p_survival = get_survival_prob(s, T)  # male survival probabilities from 2019
-annuity_rate = 1/18.09  # 18.09 is the life expectancy for a 65-year-old male
-
 
 # Utility function; CRRA
 def u(c):
@@ -39,7 +37,7 @@ grid_w = np.array(temp)
 # annuity_investment
 grid_an = np.arange(0, 101, 5)
 # annuity payout
-an_payout = grid_an * get_annuity_payment(s, T, r)
+an_payout = get_annuity_payment(grid_an, s, T, r)
 
 # Initialize solution arrays
 c = np.nan*np.zeros((n_t, len(grid_an), len(grid_w)))

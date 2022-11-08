@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 
 
 def get_survival_prob(s, T):
-    wb = load_workbook("lifetable.xlsx")
+    wb = load_workbook("first_exercise\\lifetable.xlsx")
     ws = wb["Sheet1"]
     # male death probabilities from 2019, see https://www.ssa.gov/oact/STATS/table4c6.html
     p_survival = [1-c[0].value for c in ws["B3:B122"]]
@@ -14,14 +14,14 @@ def get_survival_prob(s, T):
     return p_survival[s:T]
 
 
-def get_annuity_payment(start_age, end_age, r):
+def get_annuity_payment(annuity_investment, start_age, end_age, R):
     p_survival = get_survival_prob(start_age, end_age)
     accumulated_p_surv = 1
     res = 0
     for t in range(end_age-start_age):
         accumulated_p_surv *= p_survival[t]
-        res += accumulated_p_surv / r**t
-    return 1 / res
+        res += accumulated_p_surv / R**t
+    return annuity_investment / res
 
 
 # For now only allow annuity investments that are a multiple of 5 (are on the grid)
