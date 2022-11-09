@@ -2,3 +2,7 @@ numpy
 scipy
 openpyxl
 plotly
+numba
+interpolation
+matplotlib
+jupyter
