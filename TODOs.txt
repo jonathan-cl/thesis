@@ -3,11 +3,9 @@ Read paper
 	-> Understand procedure (reproduce results (?)); This is one of the first papers I see using volatility in inflation; what's the importance?; Also, reproducing results in that much detail would be too much; i can maybe look into a simpler problem
 	-> Familiarity with US background and used datasets
 	
-Implement graph for optimal annuitization
-Model proper lives instead of just using death probabilities -> Might have a question here; Do you still use S(t) in the expected value function? 
+Model proper lives instead of just using death probabilities -> Might have a question here; Do you still use S(t) in the expected value function?
 Set death prob of last period to 1 -> might be clearer; also read what other comment he made on this point
 Implement bequest function -> Read Cheng's mail for more details; Also think about limits of this function; Difference to luxury good feature?
-Look into the EGM repository and see whether there is anything on bequests; (can you search online; do you have to download?)
 
 
 Take a look at some other life cycle models in Julia (https://github.com/JordanVan/LifeCycleModelling)
@@ -16,3 +14,16 @@ Prepare HRS data (when I'm back in Zurich)
 
 
 At some point we will add a minimum consumption (government subsidy)
+
+
+
+---
+Done:
+Look into the EGM repository and see whether there is anything on bequests; (can you search online; do you have to download?)
+    - I cloned (downloaded) the repository and searched for 'bequest' but didn't find anything (don't think that it's possible to do that online)
+    - See (https://www.educative.io/answers/how-to-search-in-a-git-repository)
+Implement nonlinear grid spacing
+    - Copied Jeppe's code
+
+Implement graph for optimal annuitization
+
