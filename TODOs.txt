@@ -4,7 +4,6 @@ Read paper
 	-> Familiarity with US background and used datasets
 	
 Model proper lives instead of just using death probabilities -> Might have a question here; Do you still use S(t) in the expected value function?
-Set death prob of last period to 1 -> might be clearer; also read what other comment he made on this point
 Implement bequest function -> Read Cheng's mail for more details; Also think about limits of this function; Difference to luxury good feature?
 
 
@@ -26,4 +25,11 @@ Implement nonlinear grid spacing
     - Copied Jeppe's code
 
 Implement graph for optimal annuitization
+Set death prob of last period to 1 -> might be clearer; also read what other comment he made on this point
 
+
+Questions:
+What graphs make sense? I have quite a few by now and don't want to print all of them for each case; gets somewhat messy
+Ask about his comment regarding death probability at the end again?
+Ask about modelling proper lives; Do I "roll a die" for 1000 people, then determine when each of them is going to die;
+    calculate the utility for each of them and then take the average? Wouldn't that be significantly more effort?
